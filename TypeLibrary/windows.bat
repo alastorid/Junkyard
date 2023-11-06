@@ -5,9 +5,13 @@
 :: windows.bat: Generates windows.til type library for Hex Rays Decompiler
 
 @echo off
-set ver=10.0.19041.0
+set ver=10.0.18362.0
 set folder=%ProgramFiles(x86)%\Windows Kits\10\Include\%ver%
-D:\IDA\tilib64.exe -c ^
+set where=^>nul 2^>nul where tilib64
+%where% || path %path%;D:\IDA
+%where% || path %path%;C:\Program Files\IDA 7.7
+
+tilib64.exe -c ^
 -Cc1 ^
 -Ci4 ^
 -Cl4 ^
