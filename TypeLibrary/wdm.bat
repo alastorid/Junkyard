@@ -5,7 +5,7 @@
 :: wdm.bat: Generates wdm.til type library for Hex Rays Decompiler
 
 @echo off
-set ver=10.0.19041.0
+set ver=10.0.18362.0
 set folder=%ProgramFiles(x86)%\Windows Kits\10\Include\%ver%
 set where=^>nul 2^>nul where tilib64
 %where% || path %path%;D:\IDA
@@ -17,35 +17,26 @@ tilib64.exe -c ^
 -Cl4 ^
 -Cvr ^
 -D_WIN32 ^
+-D_WIN64 ^
 -D_AMD64_ ^
--DAMD64 ^
 -D_M_AMD64 ^
--DMSC_NOOPT ^
 -DDBG=1 ^
 -DDEPRECATED_DDK_FNUCTIONS=1 ^
 -D_MSC_VER=1926 ^
 -D_MSC_FULL_VER=192628807 ^
--DWINNT=1 ^
--DWINVER=_WIN32_WINNT ^
--D_WIN32_WINNT=0x0A00 ^
+-DWINVER=0x0A00 ^
 -D_WIN32_IE=0x0A00 ^
--DNTDDI_VERSION=WDK_NTDDI_VERSION ^
--DWDK_NTDDI_VERSION=NTDDI_WIN10_FE ^
--DNTDDI_WIN10_FE=0x0A00000A ^
+-DNTDDI_VERSION=0x0A000007 ^
 -D_inline=inline ^
 -D__inline=inline ^
 -D__forceinline=inline ^
 -D__volatile=volatile ^
--Dbool=uint8_t ^
--DSIZE_T=size_t ^
--DPSIZE_T=size_t* ^
+-D__ptr64=__far ^
+-D__ptr32=__far ^
+-D_Enum_is_bitflag_= ^
 -h"%folder%\km\wdm.h" ^
--I"%folder%\cppwinrt\winrt" ^
+-I"%folder%\shared" ^
 -I"%folder%\km" ^
 -I"%folder%\km\crt" ^
--I"%folder%\shared" ^
--I"%folder%\ucrt" ^
--I"%folder%\um" ^
--I"%folder%\winrt" ^
 -e ^
 wdm.til
