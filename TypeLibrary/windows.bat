@@ -6,7 +6,10 @@
 
 @echo off
 set ver=10.0.18362.0
+set ver2=2019
+set ver3=14.29.30133
 set folder=%ProgramFiles(x86)%\Windows Kits\10\Include\%ver%
+set folder2=%ProgramFiles(x86)%\Microsoft Visual Studio\%ver2%\Enterprise\VC\Tools\MSVC\%ver3%\include
 set where=^>nul 2^>nul where tilib64
 %where% || path %path%;D:\IDA
 %where% || path %path%;C:\Program Files\IDA 7.7
@@ -17,6 +20,7 @@ tilib64.exe -c ^
 -Cl4 ^
 -Cvr ^
 -D_WIN32 ^
+-D_WIN64 ^
 -D_AMD64_ ^
 -DAMD64 ^
 -D_M_AMD64 ^
@@ -36,14 +40,16 @@ tilib64.exe -c ^
 -D__inline=inline ^
 -D__forceinline=inline ^
 -D__volatile=volatile ^
+-DDECLSPEC_NOINITALL= ^
+-D__ptr64=__far ^
+-D__ptr32=__far ^
+-D_MSC_EXTENSIONS=1 ^
 -Dbool=uint8_t ^
--DSIZE_T=size_t ^
--DPSIZE_T=size_t* ^
+-R ^
 -h"%folder%\um\Windows.h" ^
--I"%folder%\cppwinrt\winrt" ^
--I"%folder%\km" ^
--I"%folder%\km\crt" ^
+-I"%folder2%" ^
 -I"%folder%\shared" ^
+-I"%folder%\cppwinrt\winrt" ^
 -I"%folder%\ucrt" ^
 -I"%folder%\um" ^
 -I"%folder%\winrt" ^
